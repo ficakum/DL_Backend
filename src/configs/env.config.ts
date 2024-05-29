@@ -16,9 +16,6 @@ type IConfig = {
 if (
   !process.env.MONGODB_CONNECTION ||
   !process.env.MONGODB_NAME ||
-  //   !process.env.MAX_MEMBERS_DEFAULT ||
-  //   !process.env.PLAYLIST_RATE_LIMIT ||
-  //   !process.env.CRON_TRACK ||
   !process.env.JWT_SECRET ||
   !process.env.JWT_EXPIRATION_TIME ||
   !process.env.JWT_REFRESH_TOKEN_EXPIRATION ||
