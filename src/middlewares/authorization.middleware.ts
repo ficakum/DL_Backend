@@ -11,7 +11,7 @@ const authorizationMiddleware: (
   req: Request,
   _res: Response,
   next: NextFunction,
-  _authorizedUsers: string[]
+  authorizedUsers: string[]
 ): void => {
   try {
     if (!req.user) {
@@ -23,7 +23,11 @@ const authorizationMiddleware: (
     }
     const user: User = req.user as User;
 
-    next();
+    if (authorizedUsers.includes(user.userType)) {
+      next();
+    } else {
+      throw new HttpException(403, "Forbidden", "Cannot execute this action");
+    }
   } catch (err) {
     next(err);
   }

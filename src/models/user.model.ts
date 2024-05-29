@@ -7,6 +7,7 @@ export type User = {
   userName: string;
   email: string;
   password: string;
+  userType: string;
 } & Document;
 
 const UserSchema: Schema<User> = new Schema<User>(
@@ -14,6 +15,7 @@ const UserSchema: Schema<User> = new Schema<User>(
     userName: { type: String, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, select: false },
+    userType: { type: String },
   },
   {
     timestamps: true,
