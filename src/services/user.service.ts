@@ -17,6 +17,21 @@ class UserService {
     return this.repository.getItem(id, properties);
   }
 
+  async getUserByProperties(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    searchQuery: Record<string, any>,
+    select: string = ""
+  ): Promise<User> {
+    return this.repository.getItemBySpecificProperties(searchQuery, select);
+  }
+
+  async getUserByPropertiesWithPassword(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    searchQuery: Record<string, any>
+  ): Promise<User> {
+    return this.getUserByProperties(searchQuery, "+password");
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async getUsers(query: Map<string, any>): Promise<ItemsPage<User>> {
     return this.repository.getItems(query);

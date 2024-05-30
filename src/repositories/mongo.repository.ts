@@ -25,6 +25,24 @@ export default class Repository<E extends Document> {
     return item;
   }
 
+  async getItemBySpecificProperties(
+    searchQuery: Record<string, unknown>,
+    select: string = ""
+  ): Promise<E> {
+    const item: E | null = await this.model.findOne(searchQuery).select(select);
+
+    if (!item) {
+      throw new NotFoundException(
+        "Item doesn't exist",
+        `Item not found. type: ${
+          this.model.collection.collectionName
+        }, searchQuery: ${JSON.stringify(searchQuery)}`
+      );
+    }
+
+    return item;
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async getItems(query: Map<string, any>): Promise<ItemsPage<E>> {
     const totalCount: number = await this.model.countDocuments(
