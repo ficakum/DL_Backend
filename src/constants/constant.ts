@@ -27,6 +27,7 @@ export enum ValidatorConstants {
 
 export enum ValidatorTypes {
   STRING = "string",
+  NUMBER = "number",
   ANY = "any",
 }
 
@@ -42,6 +43,7 @@ export enum ValidatorKeys {
   VALID = "valid",
   LENGTH = "length",
   ONLY = "only",
+  URI = "uri",
 }
 
 export enum ValidatorMessages {
@@ -55,4 +57,5 @@ export enum ValidatorMessages {
   REQUIRED = "is a required field",
   VALID = "should have values",
   LENGTH = "should be long",
+  URI = "must be a valid URL",
 }
