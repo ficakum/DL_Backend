@@ -22,7 +22,7 @@ const UserSchema: Schema<User> = new Schema<User>(
     userName: { type: String, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, select: false },
-    userType: { type: String, enum: Roles },
+    userType: { type: String, enum: Roles, default: Roles.CUSTOMER },
   },
   {
     timestamps: true,
