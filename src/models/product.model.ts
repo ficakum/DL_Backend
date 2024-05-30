@@ -1,4 +1,4 @@
-import mongoose, { CallbackError, Document, Model, Schema } from "mongoose";
+import mongoose, { Document, Model, Schema } from "mongoose";
 
 import { ModelConstants } from "../constants/constant";
 

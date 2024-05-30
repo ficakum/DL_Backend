@@ -17,4 +17,5 @@ export enum WinstonColors {
 export enum ModelConstants {
   USER = "users",
   PRODUCT = "products",
+  ORDER = "order",
 }
