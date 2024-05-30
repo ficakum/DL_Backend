@@ -28,6 +28,7 @@ export enum ValidatorConstants {
 export enum ValidatorTypes {
   STRING = "string",
   NUMBER = "number",
+  ARRAY = "array",
   ANY = "any",
 }
 
@@ -37,13 +38,12 @@ export enum ValidatorKeys {
   EMAIL = "email",
   MIN = "min",
   MAX = "max",
-  GREATER = "greater",
-  INTEGER = "integer",
   REQUIRED = "required",
   VALID = "valid",
-  LENGTH = "length",
   ONLY = "only",
   URI = "uri",
+  INCLUDES = "includes",
+  ARRAY_UNKNOWNS = "includesRequiredUnknowns",
 }
 
 export enum ValidatorMessages {
@@ -52,10 +52,9 @@ export enum ValidatorMessages {
   EMAIL = "must be in email format",
   MIN = "should have a minimum length of",
   MAX = "should have a maximum length of",
-  GREATER = "should be greater than",
-  INTEGER = "should be integer",
   REQUIRED = "is a required field",
   VALID = "should have values",
-  LENGTH = "should be long",
   URI = "must be a valid URL",
+  INCLUDES = "must contain values of type",
+  ARRAY_UNKNOWNS = "items must be of type",
 }

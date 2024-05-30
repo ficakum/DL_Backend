@@ -7,12 +7,19 @@ export enum OrderStatus {
   UNPAID = "Unpaid",
 }
 
-export type Order = { products: string[]; status: string } & Document;
+export type Order = {
+  products: string[];
+  status: string;
+  owner: string;
+  orderPrice: number;
+} & Document;
 
 const OrderSchema: Schema<Order> = new Schema<Order>(
   {
     products: { type: [String], default: [] },
     status: { type: String, enum: OrderStatus, default: OrderStatus.UNPAID },
+    owner: String,
+    orderPrice: Number,
   },
   {
     timestamps: true,
