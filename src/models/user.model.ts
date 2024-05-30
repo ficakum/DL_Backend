@@ -3,11 +3,18 @@ import mongoose, { CallbackError, Document, Model, Schema } from "mongoose";
 import { ModelConstants } from "../constants/constant";
 import { hashPassword } from "../utils/helper.methods";
 
+export enum Roles {
+  ADMIN = "admin",
+  CUSTOMER = "customer",
+  VENDOR = "vendor",
+}
+export type Role = "admin" | "customer" | "vendor";
+
 export type User = {
   userName: string;
   email: string;
   password: string;
-  userType: string;
+  userType: Role;
 } & Document;
 
 const UserSchema: Schema<User> = new Schema<User>(
@@ -15,7 +22,7 @@ const UserSchema: Schema<User> = new Schema<User>(
     userName: { type: String, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, select: false },
-    userType: { type: String },
+    userType: { type: String, enum: Roles },
   },
   {
     timestamps: true,
