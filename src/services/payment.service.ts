@@ -1,5 +1,12 @@
-class PaymentnService {}
+import { OrderStatus } from "models/order.model";
+import orderService from "./order.service";
 
-const paymentnService: PaymentnService = new PaymentnService();
+class PaymentService {
+  async payOrder(id: string) {
+    return orderService.updateOrder(id, { status: OrderStatus.PAID });
+  }
+}
 
-export default paymentnService;
+const paymentService: PaymentService = new PaymentService();
+
+export default paymentService;
