@@ -18,6 +18,7 @@ export enum ModelConstants {
   USER = "users",
   PRODUCT = "products",
   ORDER = "order",
+  IMAGE = "image",
 }
 
 export enum ValidatorConstants {
