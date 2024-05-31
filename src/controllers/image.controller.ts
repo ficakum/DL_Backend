@@ -6,9 +6,15 @@ import BadRequestException from "exceptions/badRequest.exception";
 import ServerException from "exceptions/server.exception";
 import { model } from "middlewares/image.upload.middleware";
 import HttpException from "exceptions/http.exception";
+import { Product } from "models/product.model";
+import imageService from "services/image.service";
 
-class UserController {
-  async getSimilarImages(req: Request, res: Response, next: NextFunction) {
+class ImageController {
+  async getSimilarProductsByImages(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
     const { file } = req;
 
     try {
@@ -21,34 +27,22 @@ class UserController {
       }
 
       // Read image buffer and decode it
-      const imageBuffer = file.buffer;
-      const decodedImage = tf.node.decodeImage(imageBuffer) as tf.Tensor3D;
+      const imageBuffer: Buffer = file.buffer;
+      const decodedImage: tf.Tensor3D = tf.node.decodeImage(
+        imageBuffer
+      ) as tf.Tensor3D;
 
       // Get image embeddings
-      const embeddings = model.infer(decodedImage, true) as tf.Tensor;
+      const embeddings: tf.Tensor<tf.Rank> = model.infer(
+        decodedImage,
+        true
+      ) as tf.Tensor;
 
-      // const productEmbeddings: { [key: string]: tf.Tensor } = {};
+      const similarProducts: Product[] =
+        await imageService.getSimilarProductsByImages(embeddings);
 
-      // // Find similar product embeddings with a threshold
-      // const threshold = 0.7;
-      // const similarProducts: { productId: string; similarity: number }[] = [];
-
-      // Object.entries(productEmbeddings).forEach(([id, productEmbedding]) => {
-      //   const similarity = cosineSimilarity(embeddings, productEmbedding);
-      //   if (similarity > threshold) {
-      //     similarProducts.push({ productId: id, similarity });
-      //   }
-      // });
-
-      // // Sort similar products by similarity score in descending order
-      // similarProducts.sort((a, b) => b.similarity - a.similarity);
-
-      // // Respond with the similar products
-      // res.json({ similarProducts });
-      // Process embeddings (e.g., store or compare them)
       // For demonstration, we'll just send them back
-
-      res.json({ embeddings: embeddings.arraySync() });
+      res.status(200).json(similarProducts);
     } catch (error) {
       Logger.error(
         `Error in ${__filename} - getSimilarImages method: ${
@@ -59,3 +53,7 @@ class UserController {
     }
   }
 }
+
+const imageController: ImageController = new ImageController();
+
+export default imageController;
