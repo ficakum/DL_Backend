@@ -27,12 +27,6 @@ orderRouter.post(
   authoriationMiddleware([Roles.ADMIN, Roles.CUSTOMER, Roles.VENDOR]),
   orderController.createOrder
 );
-orderRouter.patch(
-  "/:id",
-  authenticationMiddleware,
-  authoriationMiddleware([Roles.ADMIN, Roles.CUSTOMER, Roles.VENDOR]),
-  orderController.updateOrder
-);
 orderRouter.delete(
   "/:id",
   authenticationMiddleware,

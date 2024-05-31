@@ -8,6 +8,11 @@ import { Roles } from "models/user.model";
 
 const userRouter: Router = Router();
 
+userRouter.get(
+  "/logged-user",
+  authenticationMiddleware,
+  userController.getLoggedInUser
+);
 userRouter.get("/:id", authenticationMiddleware, userController.getUser);
 userRouter.get(
   "/",

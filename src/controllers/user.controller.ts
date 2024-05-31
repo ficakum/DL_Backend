@@ -1,4 +1,4 @@
-import { NextFunction, Response } from "express";
+import { NextFunction, Response, Request } from "express";
 
 import Logger from "../utils/winston.logger";
 import { User } from "models/user.model";
@@ -37,6 +37,16 @@ class UserController {
       );
       next(error);
     }
+  }
+
+  async getLoggedInUser(
+    req: Request,
+    res: Response,
+    _next: NextFunction
+  ): Promise<void> {
+    const { user } = req;
+
+    res.status(200).json(user);
   }
 
   async getUsers(
