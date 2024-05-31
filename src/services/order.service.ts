@@ -1,6 +1,6 @@
-import OrderModel, { Order } from "models/order.model";
-import Repository from "repositories/mongo.repository";
-import { ItemsPage } from "utils/types";
+import OrderModel, { Order } from "../models/order.model";
+import Repository from "../repositories/mongo.repository";
+import { ItemsPage } from "../utils/types";
 
 class OrderService {
   repository: Repository<Order>;

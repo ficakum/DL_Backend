@@ -1,12 +1,12 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-import { User } from "models/user.model";
+import { User } from "../models/user.model";
 import userService from "./user.service";
-import config from "configs/env.config";
-import UnauthorizedException from "exceptions/unauthorized.exception";
-import ValidationException from "exceptions/validation.exception";
-import { Tokens } from "utils/types";
+import config from "../configs/env.config";
+import UnauthorizedException from "../exceptions/unauthorized.exception";
+import ValidationException from "../exceptions/validation.exception";
+import { Tokens } from "../utils/types";
 
 class AuthenticationService {
   async signIn(userName: string, passwordToCheck: string): Promise<Tokens> {

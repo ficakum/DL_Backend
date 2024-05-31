@@ -1,4 +1,4 @@
-import { OrderStatus } from "models/order.model";
+import { OrderStatus } from "../models/order.model";
 import orderService from "./order.service";
 
 class PaymentService {

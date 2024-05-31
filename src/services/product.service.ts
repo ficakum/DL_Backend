@@ -1,6 +1,6 @@
-import ProductModel, { Product } from "models/product.model";
-import Repository from "repositories/mongo.repository";
-import { ItemsPage } from "utils/types";
+import ProductModel, { Product } from "../models/product.model";
+import Repository from "../repositories/mongo.repository";
+import { ItemsPage } from "../utils/types";
 
 class ProductService {
   repository: Repository<Product>;

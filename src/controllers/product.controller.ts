@@ -1,19 +1,19 @@
 import { NextFunction, Response } from "express";
 
 import Logger from "../utils/winston.logger";
-import HttpException from "exceptions/http.exception";
-import { Product } from "models/product.model";
-import productService from "services/product.service";
-import { ItemsPage } from "utils/types";
-import ProductUpdateSchemaValidator from "models/validators/updateValidators/product.update.validator";
-import ValidationException from "exceptions/validation.exception";
+import HttpException from "../exceptions/http.exception";
+import { Product } from "../models/product.model";
+import productService from "../services/product.service";
+import { ItemsPage } from "../utils/types";
+import ProductUpdateSchemaValidator from "../models/validators/updateValidators/product.update.validator";
+import ValidationException from "../exceptions/validation.exception";
 import {
   DeleteProductRequestType,
   GetProductRequestType,
   GetProductsRequestType,
   UpdateProductRequestType,
 } from "./requestTypes/product.request.types";
-import ProductCreateSchemaValidator from "models/validators/createValidators/product.create.validator";
+import ProductCreateSchemaValidator from "../models/validators/createValidators/product.create.validator";
 
 class ProductController {
   async getProduct(

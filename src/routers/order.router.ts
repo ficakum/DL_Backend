@@ -3,8 +3,8 @@ import { Router } from "express";
 import orderController from "../controllers/order.controller";
 import authenticationMiddleware from "../middlewares/jwt.middleware";
 import authoriationMiddleware from "../middlewares/authorization.middleware";
-import queryMiddleware from "middlewares/query.middleware";
-import { Roles } from "models/user.model";
+import queryMiddleware from "../middlewares/query.middleware";
+import { Roles } from "../models/user.model";
 
 const orderRouter: Router = Router();
 

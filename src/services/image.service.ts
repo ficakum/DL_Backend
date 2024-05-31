@@ -1,8 +1,8 @@
 import * as tf from "@tensorflow/tfjs-node";
 
-import Repository from "repositories/mongo.repository";
-import ImageModel, { Image } from "models/image.model";
-import { Product } from "models/product.model";
+import Repository from "../repositories/mongo.repository";
+import ImageModel, { Image } from "../models/image.model";
+import { Product } from "../models/product.model";
 import productService from "./product.service";
 
 class ImageService {
@@ -35,10 +35,11 @@ class ImageService {
     const similarImages: Image[] = [];
 
     allImages.forEach((image) => {
-      const similarity: number = this.cosineSimilarity(
-        embeddings,
-        image.featureVector
+      const imageVector: tf.Tensor<tf.Rank> = tf.tensor(
+        image.featureVector,
+        image.shape
       );
+      const similarity: number = this.cosineSimilarity(embeddings, imageVector);
 
       if (similarity > treshold) {
         similarImages.push(image);

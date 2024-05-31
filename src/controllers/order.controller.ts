@@ -1,19 +1,19 @@
 import { NextFunction, Response } from "express";
 
 import Logger from "../utils/winston.logger";
-import HttpException from "exceptions/http.exception";
-import { Order } from "models/order.model";
-import orderService from "services/order.service";
-import { ItemsPage } from "utils/types";
-import OrderUpdateSchemaValidator from "models/validators/updateValidators/order.update.validator";
-import ValidationException from "exceptions/validation.exception";
+import HttpException from "../exceptions/http.exception";
+import { Order } from "../models/order.model";
+import orderService from "../services/order.service";
+import { ItemsPage } from "../utils/types";
+import OrderUpdateSchemaValidator from "../models/validators/updateValidators/order.update.validator";
+import ValidationException from "../exceptions/validation.exception";
 import {
   DeleteOrderRequestType,
   GetOrderRequestType,
   GetOrdersRequestType,
   UpdateOrderRequestType,
 } from "./requestTypes/order.request.types";
-import OrderCreateSchemaValidator from "models/validators/createValidators/order.create.validator";
+import OrderCreateSchemaValidator from "../models/validators/createValidators/order.create.validator";
 
 class OrderController {
   async getOrder(

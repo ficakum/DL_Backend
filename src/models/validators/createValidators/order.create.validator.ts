@@ -6,7 +6,7 @@ import {
   ValidatorKeys,
   ValidatorMessages,
   ValidatorTypes,
-} from "constants/constant";
+} from "../../../constants/constant";
 
 const OrderCreateSchemaValidator: Joi.ObjectSchema<Order> = Joi.object<Order>({
   products: Joi.array()

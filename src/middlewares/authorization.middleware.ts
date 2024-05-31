@@ -1,7 +1,7 @@
-import ForbiddenException from "exceptions/forbidden.exception";
-import UnauthorizedException from "exceptions/unauthorized.exception";
-import { NextFunction, Request, Response } from "express";
-import { Role, User } from "models/user.model";
+import ForbiddenException from "../exceptions/forbidden.exception";
+import UnauthorizedException from "../exceptions/unauthorized.exception";
+import { NextFunction, Response } from "express";
+import { Role, User } from "../models/user.model";
 import { QueryMiddlewareRequestType } from "./requestTypes/middleware.request.types";
 
 const authorizationMiddleware: (

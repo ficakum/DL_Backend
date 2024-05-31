@@ -1,7 +1,7 @@
 import mongoose, { Model, Document } from "mongoose";
 
 import { ItemsPage } from "../utils/types";
-import NotFoundException from "exceptions/notFound.exception";
+import NotFoundException from "../exceptions/notFound.exception";
 
 export default class Repository<E extends Document> {
   model: Model<E>;

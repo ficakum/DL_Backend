@@ -1,7 +1,7 @@
-import HttpException from "exceptions/http.exception";
+import HttpException from "../exceptions/http.exception";
 import { NextFunction, Response } from "express";
-import { Order } from "models/order.model";
-import paymentService from "services/payment.service";
+import { Order } from "../models/order.model";
+import paymentService from "../services/payment.service";
 import Logger from "../utils/winston.logger";
 import { PayOrderRequestType } from "./requestTypes/payment.request.types";
 

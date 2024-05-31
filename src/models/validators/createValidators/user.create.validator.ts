@@ -7,7 +7,7 @@ import {
   ValidatorKeys,
   ValidatorMessages,
   ValidatorTypes,
-} from "constants/constant";
+} from "../../../constants/constant";
 
 const UserCreateSchemaValidator: Joi.ObjectSchema<User> = Joi.object<User>({
   userName: Joi.string()

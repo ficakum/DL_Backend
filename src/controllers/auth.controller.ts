@@ -1,13 +1,13 @@
 import { NextFunction, Response, Request } from "express";
 
-import HttpException from "exceptions/http.exception";
-import ValidationException from "exceptions/validation.exception";
-import PasswordValidator from "models/validators/password.validator";
-import authenticationService from "services/auth.service";
+import HttpException from "../exceptions/http.exception";
+import ValidationException from "../exceptions/validation.exception";
+import PasswordValidator from "../models/validators/password.validator";
+import authenticationService from "../services/auth.service";
 import Logger from "../utils/winston.logger";
-import { User } from "models/user.model";
-import { Tokens } from "utils/types";
-import UserCreateSchemaValidator from "models/validators/createValidators/user.create.validator";
+import { User } from "../models/user.model";
+import { Tokens } from "../utils/types";
+import UserCreateSchemaValidator from "../models/validators/createValidators/user.create.validator";
 import {
   RefreshTokenRequestType,
   ResetPasswordRequestType,

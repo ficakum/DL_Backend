@@ -7,6 +7,7 @@ dotenv.config();
 type IConfig = {
   MONGODB_CONNECTION: string;
   MONGODB_NAME: string;
+  PORT: number;
   JWT_SECRET: string;
   JWT_EXPIRATION_TIME: number;
   JWT_REFRESH_TOKEN_EXPIRATION: number;
@@ -29,6 +30,7 @@ if (
 const config: IConfig = {
   MONGODB_CONNECTION: process.env.MONGODB_CONNECTION,
   MONGODB_NAME: process.env.MONGODB_NAME,
+  PORT: Number(process.env.PORT) || 3001,
   JWT_SECRET: process.env.JWT_SECRET,
   JWT_EXPIRATION_TIME: Number(process.env.JWT_EXPIRATION_TIME),
   JWT_REFRESH_TOKEN_EXPIRATION: Number(

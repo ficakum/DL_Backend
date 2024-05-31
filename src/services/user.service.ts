@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
-import BadRequestException from "exceptions/badRequest.exception";
 
-import ValidationException from "exceptions/validation.exception";
-import UserModel, { User } from "models/user.model";
-import Repository from "repositories/mongo.repository";
-import { ItemsPage } from "utils/types";
+import BadRequestException from "../exceptions/badRequest.exception";
+import ValidationException from "../exceptions/validation.exception";
+import UserModel, { User } from "../models/user.model";
+import Repository from "../repositories/mongo.repository";
+import { ItemsPage } from "../utils/types";
 
 class UserService {
   repository: Repository<User>;

@@ -1,12 +1,12 @@
 import { NextFunction, Response, Request } from "express";
 
 import Logger from "../utils/winston.logger";
-import { User } from "models/user.model";
-import userService from "services/user.service";
-import HttpException from "exceptions/http.exception";
-import { ItemsPage } from "utils/types";
-import UserUpdateSchemaValidator from "models/validators/updateValidators/user.update.validator";
-import ValidationException from "exceptions/validation.exception";
+import { User } from "../models/user.model";
+import userService from "../services/user.service";
+import HttpException from "../exceptions/http.exception";
+import { ItemsPage } from "../utils/types";
+import UserUpdateSchemaValidator from "../models/validators/updateValidators/user.update.validator";
+import ValidationException from "../exceptions/validation.exception";
 import {
   ChangePasswordRequestType,
   DeleteUserRequestType,

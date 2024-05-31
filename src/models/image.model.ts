@@ -4,13 +4,15 @@ import mongoose, { Document, Model, Schema } from "mongoose";
 import { ModelConstants } from "../constants/constant";
 
 export type Image = {
-  featureVector: tf.Tensor<tf.Rank>;
+  featureVector: number[];
+  shape: number[];
   product: string;
 } & Document;
 
 const ImageSchema: Schema<Image> = new Schema<Image>(
   {
-    featureVector: { type: tf.Tensor<tf.Rank>, required: true },
+    featureVector: { type: [Number], required: true },
+    shape: { type: [Number], required: true },
     product: { type: String, unique: true },
   },
   {
