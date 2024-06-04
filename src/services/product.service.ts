@@ -17,6 +17,18 @@ class ProductService {
     return this.repository.getItems(query);
   }
 
+  async getProductsByIds(
+    ids: string[],
+    query: Map<string, any>
+  ): Promise<ItemsPage<Product>> {
+    query.set("searchQuery", {
+      ...query.get("searchQuery"),
+      _id: { $in: ids },
+    });
+
+    return this.repository.getItems(query);
+  }
+
   async createProduct(product: Partial<Product>): Promise<Product> {
     return this.repository.createItem(product);
   }

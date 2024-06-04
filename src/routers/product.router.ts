@@ -22,6 +22,13 @@ productRouter.get(
   productController.getProducts
 );
 productRouter.post(
+  "/ids",
+  authenticationMiddleware,
+  authoriationMiddleware([Roles.ADMIN, Roles.CUSTOMER, Roles.VENDOR]),
+  queryMiddleware,
+  productController.getProductsByIds
+);
+productRouter.post(
   "/",
   authenticationMiddleware,
   authoriationMiddleware([Roles.ADMIN, Roles.VENDOR]),

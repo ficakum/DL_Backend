@@ -10,6 +10,7 @@ import ValidationException from "../exceptions/validation.exception";
 import {
   DeleteProductRequestType,
   GetProductRequestType,
+  GetProductsByIdsRequestType,
   GetProductsRequestType,
   UpdateProductRequestType,
 } from "./requestTypes/product.request.types";
@@ -50,6 +51,29 @@ class ProductController {
       const products: ItemsPage<Product> = await productService.getProducts(
         query
       );
+
+      res.status(200).json(products);
+    } catch (error) {
+      Logger.error(
+        `Error in ${__filename} - getProducts method: ${
+          (error as HttpException).error_description
+        }`
+      );
+      next(error);
+    }
+  }
+
+  async getProductsByIds(
+    req: GetProductsByIdsRequestType,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    const { query, body } = req;
+    const { ids } = body;
+
+    try {
+      const products: ItemsPage<Product> =
+        await productService.getProductsByIds(ids, query);
 
       res.status(200).json(products);
     } catch (error) {
