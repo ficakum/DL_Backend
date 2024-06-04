@@ -61,7 +61,7 @@ const ProductCreateSchemaValidator: Joi.ObjectSchema<Product> =
           "price"
         )
       ),
-    currency: Joi.string()
+    name: Joi.string()
       .required()
       .messages(
         messagesConstructor(
@@ -71,7 +71,7 @@ const ProductCreateSchemaValidator: Joi.ObjectSchema<Product> =
             [ValidatorKeys.EMPTY]: ValidatorMessages.EMPTY,
             [ValidatorKeys.REQUIRED]: ValidatorMessages.REQUIRED,
           },
-          "currency"
+          "name"
         )
       ),
   });

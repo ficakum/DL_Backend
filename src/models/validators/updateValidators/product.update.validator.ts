@@ -52,14 +52,14 @@ const ProductUpdateSchemaValidator: Joi.ObjectSchema<Product> =
         "price"
       )
     ),
-    currency: Joi.string().messages(
+    name: Joi.string().messages(
       messagesConstructor(
         ValidatorTypes.STRING,
         {
           [ValidatorKeys.BASE]: `${ValidatorMessages.BASE} ${ValidatorTypes.STRING}`,
           [ValidatorKeys.EMPTY]: ValidatorMessages.EMPTY,
         },
-        "currency"
+        "name"
       )
     ),
   });
