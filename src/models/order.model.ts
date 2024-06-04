@@ -7,8 +7,13 @@ export enum OrderStatus {
   UNPAID = "Unpaid",
 }
 
+type OrderedProduct = {
+  productId: string;
+  numberOfProducts: number;
+};
+
 export type Order = {
-  products: string[];
+  products: OrderedProduct[];
   status: string;
   owner: string;
   orderPrice: number;
@@ -16,7 +21,15 @@ export type Order = {
 
 const OrderSchema: Schema<Order> = new Schema<Order>(
   {
-    products: { type: [String], default: [] },
+    products: {
+      type: [
+        new Schema<OrderedProduct>(
+          { productId: String, numberOfProducts: Number },
+          { _id: false, id: false }
+        ),
+      ],
+      default: [],
+    },
     status: { type: String, enum: OrderStatus, default: OrderStatus.UNPAID },
     owner: String,
     orderPrice: Number,

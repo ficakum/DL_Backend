@@ -10,28 +10,13 @@ import {
 
 const OrderUpdateSchemaValidator: Joi.ObjectSchema<Order> = Joi.object<Order>({
   products: Joi.array()
-    .items(
-      Joi.string().messages(
-        messagesConstructor(
-          ValidatorTypes.STRING,
-          {
-            [ValidatorKeys.BASE]: `${ValidatorMessages.BASE} ${ValidatorTypes.STRING}`,
-            [ValidatorKeys.EMPTY]: ValidatorMessages.EMPTY,
-            [ValidatorKeys.REQUIRED]: ValidatorMessages.REQUIRED,
-          },
-          "products.item"
-        )
-      )
-    )
     .min(1)
     .messages(
       messagesConstructor(
         ValidatorTypes.ARRAY,
         {
           [ValidatorKeys.BASE]: `${ValidatorMessages.BASE} ${ValidatorTypes.STRING}`,
-          [ValidatorKeys.INCLUDES]: `${ValidatorMessages.INCLUDES} ${ValidatorTypes.STRING}`,
           [ValidatorKeys.MIN]: `${ValidatorMessages.MIN} 1`,
-          [ValidatorKeys.ARRAY_UNKNOWNS]: `${ValidatorMessages.ARRAY_UNKNOWNS} ${ValidatorTypes.STRING}`,
         },
         "products"
       )
