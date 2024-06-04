@@ -8,7 +8,7 @@ import { Roles } from "../models/user.model";
 
 const imageRouter: Router = Router();
 
-imageRouter.get(
+imageRouter.post(
   "/",
   authenticationMiddleware,
   authoriationMiddleware([Roles.ADMIN, Roles.CUSTOMER, Roles.VENDOR]),
