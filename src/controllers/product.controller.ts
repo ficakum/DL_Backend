@@ -72,8 +72,10 @@ class ProductController {
     const { ids } = body;
 
     try {
-      const products: ItemsPage<Product> =
-        await productService.getProductsByIds(ids, query);
+      const products: Product[] = await productService.getProductsByIds(
+        ids,
+        query
+      );
 
       res.status(200).json(products);
     } catch (error) {

@@ -20,13 +20,15 @@ class ProductService {
   async getProductsByIds(
     ids: string[],
     query: Map<string, any>
-  ): Promise<ItemsPage<Product>> {
+  ): Promise<Product[]> {
     query.set("searchQuery", {
       ...query.get("searchQuery"),
       _id: { $in: ids },
     });
 
-    return this.repository.getItems(query);
+    const products: Product[] = (await this.repository.getItems(query)).items;
+
+    return products;
   }
 
   async createProduct(product: Partial<Product>): Promise<Product> {
