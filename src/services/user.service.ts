@@ -50,7 +50,9 @@ class UserService {
     } catch (error) {
       const message: string = JSON.stringify(error).includes("email")
         ? "email already exists"
-        : "userName already exists";
+        : JSON.stringify(error).includes("email")
+        ? "userName already exists"
+        : "Invalid password";
       throw new ValidationException("Object invalid", message);
     }
   }

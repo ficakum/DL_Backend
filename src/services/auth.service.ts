@@ -7,6 +7,7 @@ import config from "../configs/env.config";
 import UnauthorizedException from "../exceptions/unauthorized.exception";
 import ValidationException from "../exceptions/validation.exception";
 import { Tokens } from "../utils/types";
+import { hashPassword } from "../utils/helper.methods";
 
 class AuthenticationService {
   async signIn(userName: string, passwordToCheck: string): Promise<Tokens> {
@@ -31,6 +32,7 @@ class AuthenticationService {
   }
 
   async signUp(user: User): Promise<Tokens> {
+    user.password = await hashPassword(user.password);
     const createdUser: User = await userService.createUser(user);
 
     const jwtToken: string = this.getToken(
