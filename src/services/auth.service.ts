@@ -15,6 +15,10 @@ class AuthenticationService {
       userName,
     });
 
+    console.log(user);
+    console.log(passwordToCheck);
+    console.log(await bcrypt.hash(passwordToCheck, 12));
+
     await this.comparePasswords(passwordToCheck, user.password);
 
     const jwtToken: string = this.getToken(user.id, config.JWT_EXPIRATION_TIME);
@@ -32,7 +36,6 @@ class AuthenticationService {
   }
 
   async signUp(user: User): Promise<Tokens> {
-    user.password = await hashPassword(user.password);
     const createdUser: User = await userService.createUser(user);
 
     const jwtToken: string = this.getToken(
