@@ -15,10 +15,6 @@ class AuthenticationService {
       userName,
     });
 
-    console.log(user);
-    console.log(passwordToCheck);
-    console.log(await bcrypt.hash(passwordToCheck, 12));
-
     await this.comparePasswords(passwordToCheck, user.password);
 
     const jwtToken: string = this.getToken(user.id, config.JWT_EXPIRATION_TIME);

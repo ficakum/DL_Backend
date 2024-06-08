@@ -1,4 +1,8 @@
 "use strict";
+// import * as Jimp from "jimp";
+// import * as path from "path";
+// import * as mobilenet from "@tensorflow-models/mobilenet";
+// import * as tf from "@tensorflow/tfjs-node";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -36,32 +40,78 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// const image = async () => {
+//   const model: mobilenet.MobileNet = await mobilenet.load();
+//   const imagePath = path.join(__dirname, "111085122871_0.JPG");
+//   const image = await Jimp.read(imagePath);
+//   const buffer = await image.getBufferAsync(Jimp.MIME_JPEG);
+//   const decodedImage: tf.Tensor3D = tf.node.decodeImage(buffer) as tf.Tensor3D;
+//   // Get image embeddings
+//   const embeddings: tf.Tensor<tf.Rank> = model.infer(
+//     decodedImage,
+//     true
+//   ) as tf.Tensor;
+//   // Convert embeddings to a JSON-serializable format
+//   const embeddingData = embeddings.arraySync() as number[]; // Flatten the tensor to an array
+//   const shape = embeddings.shape; // Get the shape of the tensor
+//   console.log(embeddingData);
+//   console.log(shape);
+// };
+// image();
+var fs = require("fs");
 var Jimp = require("jimp");
 var path = require("path");
 var mobilenet = require("@tensorflow-models/mobilenet");
 var tf = require("@tensorflow/tfjs-node");
-var image = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var model, imagePath, image, buffer, decodedImage, embeddings, embeddingData, shape;
+var processImages = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var model, imagesDir, imageFiles, results, _i, imageFiles_1, file, imagePath, image, buffer, decodedImage, embeddings, embeddingData, shape;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, mobilenet.load()];
             case 1:
                 model = _a.sent();
-                imagePath = path.join(__dirname, "111085122871_0.JPG");
-                return [4 /*yield*/, Jimp.read(imagePath)];
+                imagesDir = path.join(__dirname, "images");
+                imageFiles = fs.readdirSync(imagesDir);
+                results = [];
+                _i = 0, imageFiles_1 = imageFiles;
+                _a.label = 2;
             case 2:
+                if (!(_i < imageFiles_1.length)) return [3 /*break*/, 6];
+                file = imageFiles_1[_i];
+                imagePath = path.join(imagesDir, file);
+                return [4 /*yield*/, Jimp.read(imagePath)];
+            case 3:
                 image = _a.sent();
                 return [4 /*yield*/, image.getBufferAsync(Jimp.MIME_JPEG)];
-            case 3:
+            case 4:
                 buffer = _a.sent();
                 decodedImage = tf.node.decodeImage(buffer);
                 embeddings = model.infer(decodedImage, true);
                 embeddingData = embeddings.arraySync();
                 shape = embeddings.shape;
-                console.log(embeddingData);
-                console.log(shape);
+                results.push({
+                    image: file,
+                    embeddings: embeddingData,
+                    shape: shape,
+                });
+                // Clean up the tensor to release memory
+                embeddings.dispose();
+                decodedImage.dispose();
+                _a.label = 5;
+            case 5:
+                _i++;
+                return [3 /*break*/, 2];
+            case 6:
+                // Save the results to a JSON file
+                fs.writeFileSync(path.join(__dirname, "image_embeddings.json"), JSON.stringify(results, null, 2));
                 return [2 /*return*/];
         }
     });
 }); };
-image();
+processImages()
+    .then(function () {
+    console.log("Image processing complete.");
+})
+    .catch(function (err) {
+    console.error("Error processing images:", err);
+});
