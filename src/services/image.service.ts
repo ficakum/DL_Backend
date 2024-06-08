@@ -4,6 +4,7 @@ import Repository from "../repositories/mongo.repository";
 import ImageModel, { Image } from "../models/image.model";
 import { Product } from "../models/product.model";
 import productService from "./product.service";
+import HttpException from "../exceptions/http.exception";
 
 class ImageService {
   repository: Repository<Image>;
@@ -35,11 +36,15 @@ class ImageService {
     const similarImages: Image[] = [];
 
     allImages.forEach((image) => {
-      const imageVector: tf.Tensor<tf.Rank> = tf.tensor(
+      let newFeatureVector = embeddings.arraySync();
+      if (typeof newFeatureVector === "number") {
+        newFeatureVector = [newFeatureVector];
+      }
+
+      const similarity: number = this.cosineSimilarity(
         image.featureVector,
-        image.shape
+        newFeatureVector[0] as number[]
       );
-      const similarity: number = this.cosineSimilarity(embeddings, imageVector);
 
       if (similarity > treshold) {
         similarImages.push(image);
@@ -58,19 +63,26 @@ class ImageService {
       )
     ).items;
 
-    console.log(similarProducts);
-
-    // const similarProducts: Product[] = await Promise.all(
-    //   similarImages.map((image) => productService.getProduct(image.product))
-    // );
-
     return similarProducts;
   }
 
-  private cosineSimilarity(a: tf.Tensor, b: tf.Tensor): number {
-    const dotProduct = tf.sum(tf.mul(a, b)).arraySync() as number;
-    const normA = tf.norm(a).arraySync() as number;
-    const normB = tf.norm(b).arraySync() as number;
+  private cosineSimilarity(a: number[], b: number[]): number {
+    if (a.length !== b.length) {
+      throw new Error("Vectors must have the same length");
+    }
+
+    let dotProduct = 0;
+    let normA = 0;
+    let normB = 0;
+    for (let i = 0; i < a.length; i++) {
+      dotProduct += a[i] * b[i];
+      normA += a[i] * a[i];
+      normB += b[i] * b[i];
+    }
+
+    normA = Math.sqrt(normA);
+    normB = Math.sqrt(normB);
+
     return dotProduct / (normA * normB);
   }
 }
